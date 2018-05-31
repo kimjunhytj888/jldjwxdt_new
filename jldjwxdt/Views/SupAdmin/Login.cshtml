@@ -1,0 +1,96 @@
+﻿@using jldjwxdt.Models
+@{
+    ViewBag.Title = "统计信息";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div class="panel-group" id="accordion">
+     
+
+        <!--答题统计-->
+        <div class="col-md-5 col-xs-5">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#">
+                        个人排行
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2 col-xs-2">用户id</td>
+                                <td class="col-md-2 col-xs-2">答题次数</td>
+                                <td class="col-md-2 col-xs-2">总分数</td>
+                                <td class="col-md-2 col-xs-2">平均分</td>
+                                <td class="col-md-2 col-xs-2">排行榜</td>
+                            </tr>
+
+                            @foreach (var item in (List<User_info>)ViewData["user_s"])
+                            {
+                                <tr>
+                                    <td class="col-md-2 col-xs-2">@item.usr_id</td>
+                                    <td class="col-md-2 col-xs-2">@item.dt_cnt</td>
+                                    <td class="col-md-2 col-xs-2">@item.all_fen</td>
+                                    <td class="col-md-2 col-xs-2">@item.pingjunfen</td>
+                                    <td class="col-md-2 col-xs-2">@item.paihang</td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--答题统计-->
+        <div class="col-md-5 col-xs-5">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#">
+                        部门排行
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2 col-xs-2">部门id</td>
+                                <td class="col-md-2 col-xs-2">答题次数</td>
+                                <td class="col-md-2 col-xs-2">总分数</td>
+                                <td class="col-md-2 col-xs-2">平均分</td>
+                                <td class="col-md-2 col-xs-2">排行榜</td>
+                            </tr>
+
+                            @foreach (var item in (List<User_info>)ViewData["user_s"])
+                            {
+                                <tr>
+                                    <td class="col-md-2 col-xs-2">@item.usr_id</td>
+                                    <td class="col-md-2 col-xs-2">@item.dt_cnt</td>
+                                    <td class="col-md-2 col-xs-2">@item.all_fen</td>
+                                    <td class="col-md-2 col-xs-2">@item.pingjunfen</td>
+                                    <td class="col-md-2 col-xs-2">@item.paihang</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

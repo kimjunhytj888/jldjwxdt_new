@@ -152,35 +152,140 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="CheckLogin.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\answerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ParentController.cs" />
+    <Compile Include="Controllers\SupAdminController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helps\DataSetToList .cs" />
+    <Compile Include="Helps\DbHelperSQL.cs" />
+    <Compile Include="Helps\Encrypt.cs" />
+    <Compile Include="Helps\SendMessage.cs" />
+    <Compile Include="Models\answer.cs" />
+    <Compile Include="Models\AskDtlChk.cs" />
+    <Compile Include="Models\ask_by_pid.cs" />
+    <Compile Include="Models\QAskTempByPid.cs" />
+    <Compile Include="Models\User_info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\ace-ie.min.css" />
+    <Content Include="css\ace-rtl.min.css" />
+    <Content Include="css\ace-skins.min.css" />
+    <Content Include="css\ace.min.css" />
+    <Content Include="css\bootstrap-editable.css" />
+    <Content Include="css\bootstrap-timepicker.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\chosen.css" />
+    <Content Include="css\colorbox.css" />
+    <Content Include="css\colorpicker.css" />
+    <Content Include="css\datepicker.css" />
+    <Content Include="css\daterangepicker.css" />
+    <Content Include="css\dropzone.css" />
+    <Content Include="css\font-awesome-ie7.min.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\fullcalendar.css" />
+    <Content Include="css\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="css\jquery-ui-1.10.3.full.min.css" />
+    <Content Include="css\jquery.gritter.css" />
+    <Content Include="css\select2.css" />
+    <Content Include="css\ui.jqgrid.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\ace-elements.min.js" />
+    <Content Include="Scripts\ace-extra.min.js" />
+    <Content Include="Scripts\ace.min.js" />
+    <Content Include="Scripts\additional-methods.min.js" />
+    <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\bootstrap-colorpicker.min.js" />
+    <Content Include="Scripts\bootstrap-tag.min.js" />
+    <Content Include="Scripts\bootstrap-wysiwyg.min.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
+    <Content Include="Scripts\date-time\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\date-time\bootstrap-timepicker.min.js" />
+    <Content Include="Scripts\date-time\daterangepicker.min.js" />
+    <Content Include="Scripts\date-time\moment.min.js" />
+    <Content Include="Scripts\dropzone.min.js" />
+    <Content Include="Scripts\excanvas.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.pie.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.resize.min.js" />
+    <Content Include="Scripts\fuelux\data\fuelux.tree-sampledata.js" />
+    <Content Include="Scripts\fuelux\fuelux.spinner.min.js" />
+    <Content Include="Scripts\fuelux\fuelux.tree.min.js" />
+    <Content Include="Scripts\fuelux\fuelux.wizard.min.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
+    <Content Include="Scripts\html5shiv.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-en.js" />
+    <Content Include="Scripts\jqGrid\jquery.jqGrid.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.full.min.js" />
+    <Content Include="Scripts\jquery.autosize.min.js" />
+    <Content Include="Scripts\jquery.colorbox-min.js" />
+    <Content Include="Scripts\jquery.dataTables.bootstrap.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.easy-pie-chart.min.js" />
+    <Content Include="Scripts\jquery.gritter.min.js" />
+    <Content Include="Scripts\jquery.hotkeys.min.js" />
+    <Content Include="Scripts\jquery.inputlimiter.1.3.1.min.js" />
+    <Content Include="Scripts\jquery.knob.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Scripts\jquery.mobile.custom.min.js" />
+    <Content Include="Scripts\jquery.nestable.min.js" />
+    <Content Include="Scripts\jquery.slimscroll.min.js" />
+    <Content Include="Scripts\jquery.sparkline.min.js" />
+    <Content Include="Scripts\jquery.ui.touch-punch.min.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\markdown\bootstrap-markdown.min.js" />
+    <Content Include="Scripts\markdown\markdown.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\typeahead-bs2.min.js" />
+    <Content Include="Scripts\x-editable\ace-editable.min.js" />
+    <Content Include="Scripts\x-editable\bootstrap-editable.min.js" />
+    <Content Include="Views\Admin\blank.html" />
+    <Content Include="Views\Admin\buttons.html" />
+    <Content Include="Views\Admin\calendar.html" />
+    <Content Include="Views\Admin\dropzone.html" />
+    <Content Include="Views\Admin\elements.html" />
+    <Content Include="Views\Admin\error-404.html" />
+    <Content Include="Views\Admin\error-500.html" />
+    <Content Include="Views\Admin\faq.html" />
+    <Content Include="Views\Admin\form-elements.html" />
+    <Content Include="Views\Admin\form-wizard.html" />
+    <Content Include="Views\Admin\gallery.html" />
+    <Content Include="Views\Admin\grid.html" />
+    <Content Include="Views\Admin\inbox.html" />
+    <Content Include="Views\Admin\index.html" />
+    <Content Include="Views\Admin\invoice.html" />
+    <Content Include="Views\Admin\jqgrid.html" />
+    <Content Include="Views\Admin\jquery-ui.html" />
+    <Content Include="Views\Admin\login.html" />
+    <Content Include="Views\Admin\nestable-list.html" />
+    <Content Include="Views\Admin\pricing.html" />
+    <Content Include="Views\Admin\profile.html" />
+    <Content Include="Views\Admin\tables.html" />
+    <Content Include="Views\Admin\timeline.html" />
+    <Content Include="Views\Admin\treeview.html" />
+    <Content Include="Views\Admin\typography.html" />
+    <Content Include="Views\Admin\widgets.html" />
+    <Content Include="Views\Admin\wysiwyg.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -195,10 +300,15 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\answer\answer_real.cshtml" />
+    <Content Include="Views\SupAdmin\Index.cshtml" />
+    <Content Include="Views\SupAdmin\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="js\" />
+    <Folder Include="Views\Parent\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -210,8 +320,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\fontawesome-webfont.woff" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_scrpage.cshtml" />
+    <Content Include="Views\Shared\_LayoutAsk.cshtml" />
+    <Content Include="Views\answer\real.cshtml" />
+    <Content Include="Views\answer\real_ask.cshtml" />
+    <Content Include="Views\answer\ask_end.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
