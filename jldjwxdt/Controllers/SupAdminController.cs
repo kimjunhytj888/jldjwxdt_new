@@ -14,16 +14,29 @@ namespace jldjwxdt.Controllers
         // GET: SupAdmin
         public ActionResult Index()
         {
-            return View();
+            return Content("supadmin");
         }
 
-       [HttpPost]
+      // [HttpPost]
         public ActionResult Login(FormCollection collection)
         {
-            string usr_id = collection["username"];
-            string pwd = collection["password"];
-           // User_info user_Info = new User_info();
-           
+
+            string UserName = string.Empty;
+            if (Request.Cookies["userName"] != null)
+            {
+                UserName = Server.HtmlEncode(Request.Cookies["userName"].Value);
+            }
+
+            if (string.IsNullOrEmpty(UserName))
+            {
+                return RedirectToAction("Index", "login", new { ReturnCtrl = "answer", ReturnAction = "Real" });
+            }
+            //string usr_id = collection["username"];
+            //string pwd = collection["password"];
+            // User_info user_Info = new User_info();
+            ViewData["username"] = UserName;
+
+
             DataSet ds = new DataSet();
 
 
@@ -32,7 +45,7 @@ namespace jldjwxdt.Controllers
             str_sql.Append("@fr_dt = N'2018-01-01',");//.Append(usr_id).Append("',");
             str_sql.Append("@to_dt = N'2018-05-31',");//.Append(q_seq).Append("'");
             str_sql.Append("@dept_cd = N'',");
-            str_sql.Append("@usr_id = N'").Append(usr_id).Append("'");
+            str_sql.Append("@usr_id = N'").Append(UserName).Append("'");
 
 
 
