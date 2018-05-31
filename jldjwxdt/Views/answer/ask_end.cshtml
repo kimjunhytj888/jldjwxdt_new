@@ -1,0 +1,54 @@
+﻿@using jldjwxdt.Models
+@{
+    ViewBag.Title = "ask_end";
+    Layout = "~/Views/Shared/_LayoutAsk.cshtml";
+}
+
+<div class="container">
+    <h2>答题结果</h2>
+    <div class="container">
+        <div class="row">
+
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    @foreach (var item in (List<QAskEndByPidReal>)ViewData["QAend"])
+                    {
+                        <tr>
+
+                            <td class="col-md-1 col-xs-1">第 @item.eq_sub_seq 题</td>
+
+
+                            <td class="col-md-9 col-xs-9">@item.eq_nm</td>
+                            <td class="col-md-1 col-xs-1"></td>
+                            <td class="col-md-1 col-xs-1"></td>
+
+                        </tr>
+                        <tr>
+
+                            <td class="col-md-1 col-xs-1">答案： @item.eq_key</td>
+
+                            <td class="col-md-9 col-xs-9">你的选项： @item.eu_key</td>
+                            @{
+                                if (@item.eq_key == @item.eu_key)
+                                {
+                                    <td><i class="icon-ok bigger-110 green"></i></td>
+                                }
+                                else
+                                {
+                                    <td><i class="icon-remove bigger-110 red"></i></td>
+                                }
+
+                                if (@item.eq_rmk != "")
+                                {
+                                    <td class="col-md-12 col-xs-12">正解： @item.eq_rmk</td>
+                                }
+                            }
+                        </tr>
+                    }
+                </tbody>
+
+
+
+            </table>
+        </div>
+        </div>

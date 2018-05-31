@@ -1,0 +1,53 @@
+﻿@using jldjwxdt.Models
+
+@{
+    ViewBag.Title = "real_ask";
+    Layout = "~/Views/Shared/_LayoutAsk.cshtml";
+}
+
+
+
+<form id="form1" action="@Url.Action("real_ask")@HttpUtility.UrlDecode("?id=")@ViewData["AskSeq"]" method="post">
+    <div class="container">
+        <div class="row">
+            <h1>第:@ViewData["AskSeq"] 题 </h1>
+            <br />
+
+
+            @*<h4 class="col-md-6 col-xs-6"> @ViewData["VQATBHdr1"]</h4> <h4>id</h4>*@
+            <h6 class="col-md-12 col-xs-12">  @ViewData["VQATBHdr2"]</h6>
+            <h2 class="bg-danger"> @ViewData["VQATBHdr3"]</h2>
+            @*<h2 class="col-md-6 col-xs-6"> @ViewData["VQATBHdr4"]</h2><h2>答案</h2>
+                <h2 class="col-md-6 col-xs-6"> @ViewData["VQATBHdr5"]</h2><h2>正解</h2>*@
+
+
+
+
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    @foreach (var item in (List<QAskTempByPidDtl>)ViewData["VQATBDtl"])
+                    {
+                        <tr>
+                            @*@Html.CheckBox("askdtlchk",Model.AskDtlChk("adcid"),new { value = "adcid" })*@
+                            <td class="col-md-1 col-xs-1 " intput typeof="checkbox"> @Html.CheckBox("chk", new { value = @item.k_id }) </td>
+                            <td class="col-md-1 col-xs-1">@item.k_id :</td>
+                            <td class="col-md-10 col-xs-10">@item.k_nm </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="col-md-3">
+                @{ if (@ViewData["AskSeq"].ToString() == "20")
+                    {
+                        <button type="submit" class="btn btn-info col-md-6 col-xs-6">结束答题 </button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-info col-md-6 col-xs-6">下一道题 </button>
+                    }
+                }
+            </div>
+
+        </div>
+
+</form>
