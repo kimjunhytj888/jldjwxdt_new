@@ -22,10 +22,9 @@ namespace jldjwxdt.Controllers
         static int QAcnt = 0;
         static int pid = 0;
         static string strdt = DateTime.Now.ToShortDateString(); //系统时间
-        HttpCookie UserCookie = new HttpCookie("jldjwxdt");
        
-        //static string usr_id = UserCookie["username"].ToString();
-            //"admin";// 读取login后cook 用户信息 
+       
+        
 
         // GET: answer
         //[CheckLogin(false)]
@@ -102,13 +101,10 @@ namespace jldjwxdt.Controllers
         //开始答题 循环答题内容 读取答题选择结果
         public ActionResult Real_ask(FormCollection collection)
         {
-            HttpCookie UserCookie = new HttpCookie("jldjwxdt");
+            
 
-            string UserName = HttpUtility.UrlDecode(UserCookie["UserName"]);
-            if (string.IsNullOrEmpty(UserName))
-            {
-                return View("~/login/index", "~/answer/real");
-            }
+            string UserName = Server.HtmlEncode(Request.Cookies["userName"].Value);
+
 
             int AskSeq = int.Parse(Request.QueryString["id"]) ; //题目index
             int AskSeq1 = 0;
@@ -121,6 +117,7 @@ namespace jldjwxdt.Controllers
             List<QAskTempByPidHdr> LQATBHdr = new List<QAskTempByPidHdr>();
             LQATBHdr = (List<QAskTempByPidHdr>)Session["pidlist"];
             int HQseq = 0;
+            ViewData["q_cnt"] = QAcnt;
             if (AskSeq < QAcnt)
             {
                 ViewData["VQATBHdr1"] = LQATBHdr[AskSeq].Sqid; //题目的列表 题目id
@@ -189,13 +186,10 @@ namespace jldjwxdt.Controllers
         public ActionResult ask_end()
         {
 
-            HttpCookie UserCookie = new HttpCookie("jldjwxdt");
 
-            string UserName = HttpUtility.UrlDecode(UserCookie["UserName"]);
-            if (string.IsNullOrEmpty(UserName))
-            {
-                return View("~/login/index", "~/answer/real");
-            }
+
+            string UserName = Server.HtmlEncode(Request.Cookies["userName"].Value);
+
 
             DataSet AskEnd = new DataSet();
             StringBuilder AskEndSql = new StringBuilder();

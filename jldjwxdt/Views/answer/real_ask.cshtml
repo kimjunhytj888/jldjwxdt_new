@@ -37,7 +37,7 @@
                 </tbody>
             </table>
             <div class="col-md-3">
-                @{ if (@ViewData["AskSeq"].ToString() == "20")
+                @{ if (@ViewData["AskSeq"].ToString() == ViewData["q_cnt"].ToString())
                     {
                         <button type="submit" class="btn btn-info col-md-6 col-xs-6">结束答题 </button>
                     }

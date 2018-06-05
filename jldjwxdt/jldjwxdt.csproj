@@ -152,14 +152,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="CheckLogin.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\answerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\ParentController.cs" />
     <Compile Include="Controllers\SupAdminController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,12 +187,14 @@
     <Content Include="css\daterangepicker.css" />
     <Content Include="css\dropzone.css" />
     <Content Include="css\font-awesome-ie7.min.css" />
+    <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="css\fullcalendar.css" />
     <Content Include="css\jquery-ui-1.10.3.custom.min.css" />
     <Content Include="css\jquery-ui-1.10.3.full.min.css" />
     <Content Include="css\jquery.gritter.css" />
     <Content Include="css\select2.css" />
+    <Content Include="css\style.css" />
     <Content Include="css\ui.jqgrid.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -213,8 +211,10 @@
     <Content Include="Scripts\bootstrap-colorpicker.min.js" />
     <Content Include="Scripts\bootstrap-tag.min.js" />
     <Content Include="Scripts\bootstrap-wysiwyg.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
+    <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\date-time\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\date-time\bootstrap-timepicker.min.js" />
     <Content Include="Scripts\date-time\daterangepicker.min.js" />
@@ -232,6 +232,7 @@
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\jqGrid\i18n\grid.locale-en.js" />
     <Content Include="Scripts\jqGrid\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
@@ -259,33 +260,6 @@
     <Content Include="Scripts\typeahead-bs2.min.js" />
     <Content Include="Scripts\x-editable\ace-editable.min.js" />
     <Content Include="Scripts\x-editable\bootstrap-editable.min.js" />
-    <Content Include="Views\Admin\blank.html" />
-    <Content Include="Views\Admin\buttons.html" />
-    <Content Include="Views\Admin\calendar.html" />
-    <Content Include="Views\Admin\dropzone.html" />
-    <Content Include="Views\Admin\elements.html" />
-    <Content Include="Views\Admin\error-404.html" />
-    <Content Include="Views\Admin\error-500.html" />
-    <Content Include="Views\Admin\faq.html" />
-    <Content Include="Views\Admin\form-elements.html" />
-    <Content Include="Views\Admin\form-wizard.html" />
-    <Content Include="Views\Admin\gallery.html" />
-    <Content Include="Views\Admin\grid.html" />
-    <Content Include="Views\Admin\inbox.html" />
-    <Content Include="Views\Admin\index.html" />
-    <Content Include="Views\Admin\invoice.html" />
-    <Content Include="Views\Admin\jqgrid.html" />
-    <Content Include="Views\Admin\jquery-ui.html" />
-    <Content Include="Views\Admin\login.html" />
-    <Content Include="Views\Admin\nestable-list.html" />
-    <Content Include="Views\Admin\pricing.html" />
-    <Content Include="Views\Admin\profile.html" />
-    <Content Include="Views\Admin\tables.html" />
-    <Content Include="Views\Admin\timeline.html" />
-    <Content Include="Views\Admin\treeview.html" />
-    <Content Include="Views\Admin\typography.html" />
-    <Content Include="Views\Admin\widgets.html" />
-    <Content Include="Views\Admin\wysiwyg.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -301,14 +275,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\answer\answer_real.cshtml" />
-    <Content Include="Views\SupAdmin\Index.cshtml" />
     <Content Include="Views\SupAdmin\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="js\" />
-    <Folder Include="Views\Parent\" />
-    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -323,13 +294,13 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_scrpage.cshtml" />
     <Content Include="Views\Shared\_LayoutAsk.cshtml" />
     <Content Include="Views\answer\real.cshtml" />
     <Content Include="Views\answer\real_ask.cshtml" />
     <Content Include="Views\answer\ask_end.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutMain.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

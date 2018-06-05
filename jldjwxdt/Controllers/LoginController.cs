@@ -72,7 +72,7 @@ namespace jldjwxdt.Controllers
 
                         else
                         {                            
-                            return RedirectToAction("Index", "user");//成功时的跳转路径
+                            return RedirectToAction("Login", "SupAdmin");//成功时的跳转路径
                         }
                     }
                     else
