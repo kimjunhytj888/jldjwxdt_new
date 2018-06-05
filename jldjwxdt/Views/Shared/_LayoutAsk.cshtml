@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="~/css/ui.jqgrid.css" />
     <!-- fonts -->
 
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+   @* <link rel="stylesheet" href="http://fonts.useso.com/css?family=Open+Sans:400,300" />*@
 
 
 
@@ -47,11 +47,11 @@
     </div>
 
     <script language="javascript" type="text/javascript" defer>
-        history.go(1);
+        //history.go(1);
     </script>
 
     <script language="Javascript">
-<!--
+
         function document.oncontextmenu(){ event.returnValue = false; }//屏蔽鼠标右键
         function window.onhelp(){ return false } //屏蔽F1帮助
         function document.onkeydown()
@@ -91,11 +91,12 @@
     <!-- basic scripts -->
     <!--[if !IE]> -->
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
+    <script src="~/Scripts/jquery-2.0.3.min.js"></script>
+    @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>*@
     <!-- <![endif]-->
     <!--[if IE]>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    
+         <script src="~/Scripts/jquery-1.10.2/jquery.min.js"></script>
     <![endif]-->
     <!--[if !IE]> -->
 

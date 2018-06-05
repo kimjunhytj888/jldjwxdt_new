@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,26 +11,62 @@ namespace jldjwxdt.Controllers
 {
     public class LoginController : Controller
     {
-        
+
         [HttpGet]
-        public ActionResult index(string i)
+        public ActionResult index(FormCollection collection)
         {
-            
 
+            string userName = collection["userName"];
+            string password = collection["password"];
             return View();
-
         }
 
-      
+        private void GetOnline(string Name)
+        {
+            Hashtable SingleOnline = (Hashtable)System.Web.HttpContext.Current.Application["Online"];
+            if (SingleOnline == null)
+                SingleOnline = new Hashtable();
 
+            Session["mySession"] = "jldjwxdt";
+            //SessionID
+            if (SingleOnline.ContainsKey(Name))
+            {
+                SingleOnline[Name] = Session.SessionID;
+            }
+            else
+                SingleOnline.Add(Name, Session.SessionID);
 
+            System.Web.HttpContext.Current.Application.Lock();
+            System.Web.HttpContext.Current.Application["Online"] = SingleOnline;
+            System.Web.HttpContext.Current.Application.UnLock();
+        }
+
+        public class LoginActionFilter : ActionFilterAttribute
+        {
+            public override void OnActionExecuting(ActionExecutingContext filterContext)
+            {
+                Hashtable singleOnline = (Hashtable)filterContext.HttpContext.Application["Online"];
+
+                var test = filterContext.HttpContext.User.Identity.Name;
+                // 判断当前SessionID是否存在
+                if (singleOnline != null && singleOnline.ContainsKey(filterContext.HttpContext.User.Identity.Name))
+                {
+                    if (!singleOnline[filterContext.HttpContext.User.Identity.Name].Equals(filterContext.HttpContext.Session.SessionID))
+                    {
+                        filterContext.Result = new ContentResult() { Content = "<script>if(confirm('你的账号已在别处登陆，是否返回登陆页面重新登陆？')){window.location.href='/Authentication/Login';}else{window.close();}</script>" };
+                    }
+                }
+                base.OnActionExecuting(filterContext);
+            }
+        }
+
+        [LoginActionFilter]
         [HttpPost]
-       
-             public ActionResult index(string ReturnCtrl, string ReturnAction)
+        public ActionResult index(string ReturnCtrl, string ReturnAction)
         {
 
             string login = Request.Form["login"];
-           
+
 
             if (login == "Y")
             {
@@ -42,28 +79,23 @@ namespace jldjwxdt.Controllers
                 }
                 else
                 {
-                    if (userName == "admin")
+                    Encrypt encrypt = new Encrypt();
+                    string pwdsql = "select user_pwd from b_user where user_id = '" + userName + "'";
+                    if( encrypt.JiaMi(password) == DbHelperSQL.GetSingle(pwdsql).ToString())
                     {
-
-
-
+                   
+                        GetOnline(userName);
 
                         //把登陆用户名存到cookies中
                         Response.Cookies["userName"].Value = userName;
+                        Response.Cookies["password"].Value = password;
                         Response.Cookies["userName"].Expires = DateTime.Now.AddDays(1);
+                        Response.Cookies["password"].Expires = DateTime.Now.AddDays(1);
 
 
 
 
-                        //HttpCookie UserCookie = new HttpCookie("jldjwxdt");
-
-                        /////设置cookie 
-                        /////userid 用户id
-
-
-                        //UserCookie["username"] = userName.ToString(); //
-                        //UserCookie.Expires = DateTime.Now.AddDays(10);//这里设置要保存多长时间.
-                        //Response.Cookies.Add(UserCookie);
+                     
 
                         if (!string.IsNullOrEmpty(ReturnCtrl))
                         {
@@ -71,8 +103,8 @@ namespace jldjwxdt.Controllers
                         }
 
                         else
-                        {                            
-                            return RedirectToAction("Index", "user");//成功时的跳转路径
+                        {
+                            return RedirectToAction("login", "supadmin");//成功时的跳转路径
                         }
                     }
                     else

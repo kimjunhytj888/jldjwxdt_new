@@ -50,6 +50,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcPager">
+      <HintPath>..\..\..\..\Downloads\MvcPager\MvcPager.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -157,9 +160,7 @@
     <Compile Include="Controllers\answerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\ParentController.cs" />
     <Compile Include="Controllers\SupAdminController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -259,34 +260,9 @@
     <Content Include="Scripts\typeahead-bs2.min.js" />
     <Content Include="Scripts\x-editable\ace-editable.min.js" />
     <Content Include="Scripts\x-editable\bootstrap-editable.min.js" />
-    <Content Include="Views\Admin\blank.html" />
-    <Content Include="Views\Admin\buttons.html" />
-    <Content Include="Views\Admin\calendar.html" />
-    <Content Include="Views\Admin\dropzone.html" />
-    <Content Include="Views\Admin\elements.html" />
-    <Content Include="Views\Admin\error-404.html" />
-    <Content Include="Views\Admin\error-500.html" />
-    <Content Include="Views\Admin\faq.html" />
-    <Content Include="Views\Admin\form-elements.html" />
-    <Content Include="Views\Admin\form-wizard.html" />
-    <Content Include="Views\Admin\gallery.html" />
-    <Content Include="Views\Admin\grid.html" />
-    <Content Include="Views\Admin\inbox.html" />
-    <Content Include="Views\Admin\index.html" />
-    <Content Include="Views\Admin\invoice.html" />
-    <Content Include="Views\Admin\jqgrid.html" />
-    <Content Include="Views\Admin\jquery-ui.html" />
-    <Content Include="Views\Admin\login.html" />
-    <Content Include="Views\Admin\nestable-list.html" />
-    <Content Include="Views\Admin\pricing.html" />
-    <Content Include="Views\Admin\profile.html" />
-    <Content Include="Views\Admin\tables.html" />
-    <Content Include="Views\Admin\timeline.html" />
-    <Content Include="Views\Admin\treeview.html" />
-    <Content Include="Views\Admin\typography.html" />
-    <Content Include="Views\Admin\widgets.html" />
-    <Content Include="Views\Admin\wysiwyg.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -307,7 +283,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="js\" />
-    <Folder Include="Views\Parent\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
@@ -323,13 +298,14 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_scrpage.cshtml" />
     <Content Include="Views\Shared\_LayoutAsk.cshtml" />
     <Content Include="Views\answer\real.cshtml" />
     <Content Include="Views\answer\real_ask.cshtml" />
     <Content Include="Views\answer\ask_end.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\SupAdmin\LoginSupadmin.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

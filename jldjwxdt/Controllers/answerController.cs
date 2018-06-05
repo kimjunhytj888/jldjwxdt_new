@@ -22,10 +22,7 @@ namespace jldjwxdt.Controllers
         static int QAcnt = 0;
         static int pid = 0;
         static string strdt = DateTime.Now.ToShortDateString(); //系统时间
-        HttpCookie UserCookie = new HttpCookie("jldjwxdt");
-       
-        //static string usr_id = UserCookie["username"].ToString();
-            //"admin";// 读取login后cook 用户信息 
+
 
         // GET: answer
         //[CheckLogin(false)]
@@ -36,12 +33,7 @@ namespace jldjwxdt.Controllers
 
         //[HttpPost]
         //[ActionName("real")]
-        //开始答题前 
-        /// <summary>
-        /// [CheckLogin] 检查是否登陆 没登陆跳转到登陆页面
-        /// </summary>
-        /// <returns></returns>
-         
+
         public ActionResult Real()
         {
             string UserName = string.Empty;
@@ -49,13 +41,13 @@ namespace jldjwxdt.Controllers
             {
                 UserName = Server.HtmlEncode(Request.Cookies["userName"].Value);
             }
-            
+
             if (string.IsNullOrEmpty(UserName))
             {
-                return RedirectToAction("Index", "login", new { ReturnCtrl = "answer" , ReturnAction ="Real"});
+                return RedirectToAction("Index", "login", new { ReturnCtrl = "answer", ReturnAction = "Real" });
             }
 
-                pid = Process.GetCurrentProcess().Id; //线程id
+            pid = Process.GetCurrentProcess().Id; //线程id
 
             //当前用户今天答了几次题
             string sql_par = "  user_id = '" + UserName + "' and q_dt = '" + strdt + "'";
@@ -102,20 +94,23 @@ namespace jldjwxdt.Controllers
         //开始答题 循环答题内容 读取答题选择结果
         public ActionResult Real_ask(FormCollection collection)
         {
-            HttpCookie UserCookie = new HttpCookie("jldjwxdt");
-
-            string UserName = HttpUtility.UrlDecode(UserCookie["UserName"]);
-            if (string.IsNullOrEmpty(UserName))
+            string UserName = string.Empty;
+            if (Request.Cookies["userName"] != null)
             {
-                return View("~/login/index", "~/answer/real");
+                UserName = Server.HtmlEncode(Request.Cookies["userName"].Value);
             }
 
-            int AskSeq = int.Parse(Request.QueryString["id"]) ; //题目index
+            if (string.IsNullOrEmpty(UserName))
+            {
+                return RedirectToAction("Index", "login", new { ReturnCtrl = "answer", ReturnAction = "Real_ask" });
+            }
+
+            int AskSeq = int.Parse(Request.QueryString["id"]); //题目index
             int AskSeq1 = 0;
             if (AskSeq > 0)
             {
 
-                 AskSeq1 = AskSeq - 1;
+                AskSeq1 = AskSeq - 1;
             }
 
             List<QAskTempByPidHdr> LQATBHdr = new List<QAskTempByPidHdr>();
@@ -129,35 +124,35 @@ namespace jldjwxdt.Controllers
                 ViewData["VQATBHdr4"] = LQATBHdr[AskSeq].q_key; //题目的列表 答案 需隐藏？
                 ViewData["VQATBHdr5"] = LQATBHdr[AskSeq].q_rmk; //题目的列表 正解
                 HQseq = LQATBHdr[AskSeq].Sqid; //题号
-           
-
-            
 
 
-            DataSet QAskDtl = new DataSet();
-            StringBuilder sbdtl = new StringBuilder();
-            sbdtl.Append("EXEC usp_real_q_dtl ");
-            sbdtl.Append("@q_id = ").Append(HQseq);
-            List<QAskTempByPidDtl> LQATBDtl = new List<QAskTempByPidDtl>();
-
-            QAskDtl = DbHelperSQL.Query(sbdtl.ToString());
-            Helps.dts2l dts2L = new Helps.dts2l();
-
-            LQATBDtl = dts2L.DataSetToList<QAskTempByPidDtl>(QAskDtl, 0);
-            ViewData["VQATBDtl"] = LQATBDtl;
-            if (AskSeq > 0)
-            {
-                string chk = Request["chk"].ToString();
-                chk = chk.Replace("false", "");
-                chk = chk.Replace(",", "");
 
 
-                // Adtlexec(LQATBDtl);
-                int askseqck = AskSeq - 1;
 
-                Ahdrexec(LQATBHdr, AskSeq, chk,UserName); //insert 到历史表中 
-            }
-            
+                DataSet QAskDtl = new DataSet();
+                StringBuilder sbdtl = new StringBuilder();
+                sbdtl.Append("EXEC usp_real_q_dtl ");
+                sbdtl.Append("@q_id = ").Append(HQseq);
+                List<QAskTempByPidDtl> LQATBDtl = new List<QAskTempByPidDtl>();
+
+                QAskDtl = DbHelperSQL.Query(sbdtl.ToString());
+                Helps.dts2l dts2L = new Helps.dts2l();
+
+                LQATBDtl = dts2L.DataSetToList<QAskTempByPidDtl>(QAskDtl, 0);
+                ViewData["VQATBDtl"] = LQATBDtl;
+                if (AskSeq > 0)
+                {
+                    string chk = Request["chk"].ToString();
+                    chk = chk.Replace("false", "");
+                    chk = chk.Replace(",", "");
+
+
+                    // Adtlexec(LQATBDtl);
+                    int askseqck = AskSeq - 1;
+
+                    Ahdrexec(LQATBHdr, AskSeq, chk, UserName, "N"); //insert 到历史表中 
+                }
+
             }
             if (AskSeq < QAcnt)
             {
@@ -173,9 +168,9 @@ namespace jldjwxdt.Controllers
                 chk = chk.Replace(",", "");
 
 
-             
 
-                Ahdrexec(LQATBHdr, AskSeq, chk,UserName); //insert 到历史表中 
+
+                Ahdrexec(LQATBHdr, AskSeq, chk, UserName, "Y"); //insert 到历史表中 
 
                 return RedirectToAction("ask_end");
 
@@ -184,17 +179,22 @@ namespace jldjwxdt.Controllers
 
         }
 
-       
+
 
         public ActionResult ask_end()
         {
 
-            HttpCookie UserCookie = new HttpCookie("jldjwxdt");
 
-            string UserName = HttpUtility.UrlDecode(UserCookie["UserName"]);
+
+            string UserName = string.Empty;
+            if (Request.Cookies["userName"] != null)
+            {
+                UserName = Server.HtmlEncode(Request.Cookies["userName"].Value);
+            }
+
             if (string.IsNullOrEmpty(UserName))
             {
-                return View("~/login/index", "~/answer/real");
+                return RedirectToAction("Index", "login", new { ReturnCtrl = "answer", ReturnAction = "ask_end" });
             }
 
             DataSet AskEnd = new DataSet();
@@ -227,16 +227,10 @@ namespace jldjwxdt.Controllers
             return View();
         }
 
-            private void Ahdrexec(List<QAskTempByPidHdr> lQATBHdr, int AskSeq, string chk,string UserName)
+        private void Ahdrexec(List<QAskTempByPidHdr> lQATBHdr, int AskSeq, string chk, string UserName, string end_flag)
         {
 
-            //HttpCookie UserCookie = new HttpCookie("jldjwxdt");
 
-            //string UserName = HttpUtility.UrlDecode(UserCookie["UserName"]);
-            //if (string.IsNullOrEmpty(UserName))
-            //{
-            //    return View("login/index", "answer/real");
-            //}
 
             QAskTempByPidHdr qAskTempByPidHdr = new QAskTempByPidHdr();
             foreach (QAskTempByPidHdr s in lQATBHdr)
@@ -264,7 +258,29 @@ namespace jldjwxdt.Controllers
                 }
 
 
+                if (end_flag == "Y")
+                {
 
+                    StringBuilder Ahdrexec1 = new StringBuilder();
+                    Ahdrexec1.Append("insert into  u_question_hst " +
+                        "(       user_id,    q_dt,    q_seq,    q_sub_seq,    q_id,    k_val,        isrt_dt) VALUES ( ");
+
+                    Ahdrexec1.Append("'").Append(UserName).Append("',");
+                    Ahdrexec1.Append("'").Append(strdt).Append("',");
+                    Ahdrexec1.Append("'").Append(qdseq).Append("',");
+                    Ahdrexec1.Append("'").Append(AskSeq).Append("',");
+                    Ahdrexec1.Append("'").Append(s.Sqid).Append("',");
+                    Ahdrexec1.Append("'").Append(chk).Append("',");
+                    Ahdrexec1.Append("'").Append(strdt).Append("')");
+
+                    int trn = DbHelperSQL.ExecuteSql(Ahdrexec1.ToString());
+                    if (trn == 0)
+                    {
+                        Content("Error Ahdrexec");
+                    }
+
+
+                }
 
             }
 

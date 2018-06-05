@@ -12,7 +12,7 @@ namespace jldjwxdt.Controllers
         public ActionResult Index()
         {
 
-            return View();
+            return Content("请从正确入口访问程序！");
         }
     }
 }
