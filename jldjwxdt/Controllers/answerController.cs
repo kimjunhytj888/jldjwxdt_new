@@ -56,6 +56,9 @@ namespace jldjwxdt.Controllers
 
                 pid = Process.GetCurrentProcess().Id; //线程id
 
+            string chk_delete = "exec usp_chk_delete '"+UserName+"'";
+            DbHelperSQL.GetSingle(chk_delete);
+
             //当前用户今天答了几次题
             string sql_par = "  user_id = '" + UserName + "' and q_dt = '" + strdt + "'";
             qdseq = DbHelperSQL.GetMaxID("q_seq", "u_question_hst_log", sql_par); //需要修改成历史表 测试时是log表
@@ -152,7 +155,9 @@ namespace jldjwxdt.Controllers
                 // Adtlexec(LQATBDtl);
                 int askseqck = AskSeq - 1;
 
-                Ahdrexec(LQATBHdr, AskSeq, chk,UserName); //insert 到历史表中 
+                    string end_flag = "N";
+
+                    Ahdrexec(LQATBHdr, AskSeq, chk,UserName,end_flag); //insert 到历史表中 
             }
             
             }
@@ -170,9 +175,10 @@ namespace jldjwxdt.Controllers
                 chk = chk.Replace(",", "");
 
 
+                string end_flag = "Y";
              
 
-                Ahdrexec(LQATBHdr, AskSeq, chk,UserName); //insert 到历史表中 
+                Ahdrexec(LQATBHdr, AskSeq, chk,UserName,end_flag); //insert 到历史表中 
 
                 return RedirectToAction("ask_end");
 
@@ -221,7 +227,7 @@ namespace jldjwxdt.Controllers
             return View();
         }
 
-            private void Ahdrexec(List<QAskTempByPidHdr> lQATBHdr, int AskSeq, string chk,string UserName)
+            private void Ahdrexec(List<QAskTempByPidHdr> lQATBHdr, int AskSeq, string chk,string UserName ,string end_flag)
         {
 
             //HttpCookie UserCookie = new HttpCookie("jldjwxdt");
@@ -255,6 +261,28 @@ namespace jldjwxdt.Controllers
                     {
                         Content("Error Ahdrexec");
                     }
+
+                }
+
+                if (end_flag == "Y")
+                {
+                    StringBuilder Ahdrexec1 = new StringBuilder();
+                    Ahdrexec1.Append("insert into  u_question_hst " +
+                        "(        user_id,    q_dt,    q_seq,    q_sub_seq,    q_id,    k_val,        isrt_dt) VALUES ( ");
+                    Ahdrexec1.Append("'").Append(UserName).Append("',");
+                    Ahdrexec1.Append("'").Append(strdt).Append("',");
+                    Ahdrexec1.Append("'").Append(qdseq).Append("',");
+                    Ahdrexec1.Append("'").Append(AskSeq).Append("',");
+                    Ahdrexec1.Append("'").Append(s.Sqid).Append("',");
+                    Ahdrexec1.Append("'").Append(chk).Append("',");
+                    Ahdrexec1.Append("'").Append(strdt).Append("')");
+
+                    int trn1 = DbHelperSQL.ExecuteSql(Ahdrexec1.ToString());
+                    if (trn1 == 0)
+                    {
+                        Content("Error Ahdrexec");
+                    }
+
                 }
 
 
@@ -264,10 +292,7 @@ namespace jldjwxdt.Controllers
 
         }
 
-        private void Adtlexec(List<QAskTempByPidDtl> LQATBDtl)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 
 

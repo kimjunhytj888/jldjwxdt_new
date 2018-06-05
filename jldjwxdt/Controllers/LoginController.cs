@@ -42,28 +42,21 @@ namespace jldjwxdt.Controllers
                 }
                 else
                 {
-                    if (userName == "admin")
+                    Encrypt encrypt = new Encrypt();
+                    string pwdsql = "select user_pwd from b_user where user_id = '" + userName + "'";
+                    if (encrypt.JiaMi(password) == DbHelperSQL.GetSingle(pwdsql).ToString())
                     {
-
-
 
 
                         //把登陆用户名存到cookies中
                         Response.Cookies["userName"].Value = userName;
                         Response.Cookies["userName"].Expires = DateTime.Now.AddDays(1);
+                        string ssid = Session.SessionID;
 
+                        //user his Table insert
+                        string hisinstsql = "exec usp_userhsy_log 'I','"+userName+"', '"+ssid+"'";
+                        DbHelperSQL.GetSingle(hisinstsql);
 
-
-
-                        //HttpCookie UserCookie = new HttpCookie("jldjwxdt");
-
-                        /////设置cookie 
-                        /////userid 用户id
-
-
-                        //UserCookie["username"] = userName.ToString(); //
-                        //UserCookie.Expires = DateTime.Now.AddDays(10);//这里设置要保存多长时间.
-                        //Response.Cookies.Add(UserCookie);
 
                         if (!string.IsNullOrEmpty(ReturnCtrl))
                         {

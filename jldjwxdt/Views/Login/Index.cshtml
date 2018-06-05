@@ -18,7 +18,14 @@
             <fieldset>
                 <div class="input-prepend" title="用户名：" data-rel="tooltip">
                     <span class="add-on"><i class="icon-user"></i></span>
-                    <input autofocus class="input-large span10" name="username" id="username" type="text" value="用户名" />
+                    @if (Request.Cookies["userName"] != null)
+                    {
+                        <input autofocus class="input-large span10" name="username" id="username" type="text" value=@Request.Cookies["userName"].Value />
+                    }
+                    else
+                    {
+                        <input autofocus class="input-large span10" name="username" id="username" type="text" value="用户名" />
+                    }
                 </div>
                 <div class="clearfix"></div>
                 <div class="input-prepend" title="密 码：" data-rel="tooltip">
