@@ -43,6 +43,38 @@
     <script src="~/Scripts/html5shiv.js"></script>
     <script src="~/Scripts/respond.min.js"></script>
     <![endif]-->
+    <!--News add -->
+    <link rel="stylesheet" href="~/KindEditor/themes/default/default.css" />
+    <link rel="stylesheet" href="../KindEditor/plugins/code/prettify.css" />
+    <script charset="utf-8" src="~/KindEditor/kindeditor-all.js"></script>
+    <script charset="utf-8" src="../KindEditor/lang/zh-CN.js"></script>
+    <script charset="utf-8" src="../KindEditor/plugins/code/prettify.js"></script>
+   
+
+    <script>
+        KindEditor.ready(function (K) {
+            var editor1 = K.create('#content1', {
+                cssPath: '../kindeditor/plugins/code/prettify.css',
+                uploadJson: '../kindeditor/upload_json.ashx',
+                fileManagerJson: '../kindeditor/file_manager_json.ashx',
+                allowFileManager: true,
+                afterCreate: function () {
+                    var self = this;
+                    K.ctrl(document, 13, function () {
+                        self.sync();
+                        K('form[name=example]')[0].submit();
+                    });
+                    K.ctrl(self.edit.doc, 13, function () {
+                        self.sync();
+                        K('form[name=example]')[0].submit();
+                    });
+                }
+            });
+            prettyPrint();
+        });
+    </script>
+    <!--News add end-->
+
 </head>
 
 <body>
@@ -139,16 +171,16 @@
                     <li>
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-tag"></i>
-                            <span class="menu-text"> 标签信息 </span>
+                            <span class="menu-text"> 新闻管理 </span>
 
                             <b class="arrow icon-angle-down"></b>
                         </a>
 
                         <ul class="submenu">
                             <li>
-                                <a href="@Url.Action("index")">
-                                    <i class="icon-double-angle-right"></i>
-                                    登记
+                                <a href="@Url.Content("~/news/add")">新闻登记
+                                <i class="icon-double-angle-right"></i>
+                              
                                 </a>
                             </li>
 
@@ -164,7 +196,7 @@
                     <li>
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-edit"></i>
-                            <span class="menu-text"> 发送信息 </span>
+                            <span class="menu-text"> 统计信息 </span>
 
                             <b class="arrow icon-angle-down"></b>
                         </a>
@@ -173,21 +205,21 @@
                             <li>
                                 <a href="form-elements.html">
                                     <i class="icon-double-angle-right"></i>
-                                    考勤信息
+                                    新闻统计
                                 </a>
                             </li>
 
                             <li>
                                 <a href="form-wizard.html">
                                     <i class="icon-double-angle-right"></i>
-                                    工资信息
+                                    考试统计
                                 </a>
                             </li>
 
                             <li>
                                 <a href="wysiwyg.html">
                                     <i class="icon-double-angle-right"></i>
-                                    文字信息
+                                    人员统计
                                 </a>
                             </li>
                         </ul>
@@ -238,7 +270,7 @@
                     </ul><!-- .breadcrumb -->
                 </div>
 
-                <div class="page-content">
+                <div class="page-content container">
                     @RenderBody()
 
                 </div><!-- /.page-content -->
@@ -252,11 +284,11 @@
     <!-- basic scripts -->
     <!--[if !IE]> -->
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-2.0.3.min.js"></script>
 
     <!-- <![endif]-->
     <!--[if IE]>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <![endif]-->
     <!--[if !IE]> -->
 
@@ -309,7 +341,7 @@
     }
     else
     {
-        <p>SubMenu Section is not defined!</p>
+       // <p>SubMenu Section is not defined!</p>
     }
 
 

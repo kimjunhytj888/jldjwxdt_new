@@ -1,0 +1,54 @@
+﻿@using jldjwxdt.Models
+
+@{
+    ViewBag.Title = "添加题库";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+
+
+<form role="form" id="Qinstform" action="@Url.Action("add")@HttpUtility.UrlDecode("?id=")@ViewData["qid"]" method="post">
+    <div class="form-group">
+        <label for="name">题号： @ViewData["qid"]</label>
+        <br />
+        <label for="name">题目分类</label>
+        <select id ="QhdSelect" name ="QhdSelect" class="form-control" style="width:200px">
+            @foreach (var item in (List<NewsType>)ViewData["minorhd"])
+            {
+
+                <option selected value="@item.TypeCd">@item.Typenm</option>
+            }
+        </select>
+
+        <br />
+
+        <label for="name">题目</label>
+        <input id="Qhd" name="Qhd" style="width:1000px" type="text" class="form-control" placeholder="文本输入">
+
+        <div>
+            <label for="name">题目选项(输入选项后正确答案请打勾)</label>
+            <br />
+
+            @foreach (var item in (List<NewsType>)ViewData["minordt"])
+            {
+
+                @*@Html.CheckBox("askdtlchk",Model.AskDtlChk("adcid"),new { value = "adcid" })*@
+                <td class="col-md-1 col-xs-1 " intput typeof="checkbox"> @Html.CheckBox("chk", new { value = @item.TypeCd }) </td>
+                <td class="col-md-1 col-xs-1">@item.Typenm</td>
+                <input id=@item.TypeCd name=@item.TypeCd style="width:1000px" type="text" class="form-control" placeholder="请输入选项 没有请留空">
+
+
+            }
+
+            <label for="name">答案正解</label>
+            <input id="Qrmk" name="Qrmk" style="width:1000px" type="text" class="form-control" placeholder="没有请留空">
+
+        </div>
+        <br />
+
+        <Button ID="Button1" class="btn btn-primary" type="submit" Text="提交内容" /> (提交内容)
+
+    </div>
+</form>

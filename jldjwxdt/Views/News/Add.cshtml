@@ -1,0 +1,124 @@
+﻿@using jldjwxdt.Models
+
+@{
+    ViewBag.Title = "添加新闻";
+    Layout = null;// "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!--News add -->
+    <link rel="stylesheet" href="../kindeditor/themes/default/default.css" />
+    <link rel="stylesheet" href="../kindeditor/plugins/code/prettify.css" />
+    <script charset="utf-8" src="../kindeditor/kindeditor-all.js"></script>
+    <script charset="utf-8" src="../kindeditor/lang/zh-CN.js"></script>
+    <script charset="utf-8" src="../kindeditor/plugins/code/prettify.js"></script>
+    <!-- 引入 Bootstrap -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="~/css/font-awesome-ie7.min.css" />
+    <![endif]-->
+    <!-- page specific plugin styles -->
+
+    <link rel="stylesheet" href="~/css/jquery-ui-1.10.3.full.min.css" />
+    <link rel="stylesheet" href="~/css/datepicker.css" />
+    <link rel="stylesheet" href="~/css/ui.jqgrid.css" />
+    <!-- fonts -->
+    <script>
+        var options = {
+            cssPath: '../kindeditor/plugins/code/prettify.css',
+            uploadJson: '../kindeditor/upload_json.ashx',
+            fileManagerJson: '../kindeditor/file_manager_json.ashx',
+            allowFileManager: true
+            //,
+            // afterCreate: function () {
+            //    var self = this;
+            //    K.ctrl(document, 13, function () {
+            //        self.sync();
+            //        K('form[name=example]')[0].submit();
+            //    });
+            //    K.ctrl(self.edit.doc, 13, function () {
+            //        self.sync();
+            //        K('form[name=example]')[0].submit();
+            //    });
+            //}
+
+        };
+        var options1 = {
+            cssPath: '../kindeditor/plugins/code/prettify.css',
+            uploadJson: '../kindeditor/upload_json.ashx',
+            fileManagerJson: '../kindeditor/file_manager_json.ashx',
+            allowFileManager: true,
+            items: [
+                'image'
+            ]
+
+
+        };
+        var editor = new Array();
+        KindEditor.ready(function (K) {
+            // editor[0] = K.create("#content1", options1);
+            editor[1] = K.create("#content2", options1);
+            editor[2] = K.create("#content3", options);
+        });
+                          ///K.create('textarea[name=zContent]',
+
+    </script>
+</head>
+<body>
+    <Label ID="Label1" Text="Label1"></Label>
+    <form id="example" action="@Url.Action("add")" method="post">
+        @*<h4>新闻标题</h4>*@
+        <div class="container">
+            @*<div class="row">
+                    <label class="col-md-1" for="name">新闻标题:</label>
+                    <input type="text" class="form-control col-md-10" id="name" placeholder="请输入新闻标题">
+                </div>*@
+            <div class="form-group">
+                <label for="name">新闻标题</label>
+                <input id="content1" name="content1" style="width:1000px" type="text" class="form-control" placeholder="文本输入">
+            </div>
+        </div>
+        <br />
+        <div class="container">
+            <div class="form-group">
+                <label for="name">新闻类型</label>
+                <select class="form-control" style="width:150px" id="ntype" name="ntype">
+                    @foreach (var item in (List<NewsType>)ViewData["ntype"])
+                    {
+
+                        <option selected value="@item.TypeCd">@item.Typenm</option>
+                    }
+                </select>
+
+            </div>
+
+
+                @*<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> 选项 1*@
+        
+        </div>
+        <div class="container">
+            <label for="name">标题图片</label>
+            <textarea id="content2" name="content2" style="width:200px;height:200px;visibility:hidden;"></textarea>
+            <span class="help-block">
+                可用剪贴板粘贴图片或上传本地图片 不要输入其他文字或字符包括回车按键！不要输入其他文字或字符包括回车按键！不要输入其他文字或字符包括回车按键！
+            </span>
+        </div>
+        <div class="container">
+            <label for="name">新闻内容</label>
+            <textarea id="content3" name="content3" cols="100" rows="20" style="width:1000px;height:400px;visibility:hidden;"></textarea>
+            <br />
+            @*<input autofocus class="input-large span10" name="test1" id="test1" type="text" value="用户名" />*@
+            <Button ID="Button1" class="btn btn-primary" type="submit" Text="提交内容" /> (提交快捷键: Ctrl + Enter)
+        </div>
+    </form>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+
+</html>

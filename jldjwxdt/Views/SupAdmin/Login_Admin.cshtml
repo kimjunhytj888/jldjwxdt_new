@@ -1,0 +1,52 @@
+﻿@model  jldjwxdt.Helps.PagerResult<jldjwxdt.Models._QaListPage>
+@{
+    ViewBag.Title = "部门管理员";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@Html.ActionLink("导出数据", "OutPutExcel")
+<div class="container">
+    <div>
+        <form method="get">
+            userid：
+            <input name="userid" id="userid" />
+            deptnm：
+            <input name="deptnm" id="deptnm" />
+            <input type="submit" value="查询" />
+        </form>
+    </div>
+    <div class="container">
+        <table class="table table-bordered">
+            <tr>
+                <th class="col-md-2 col-xs-2">用户id</th>
+                <th class="col-md-4 col-xs-4">部门名称</th>
+                <th class="col-md-3 col-xs-3">答题日期</th>
+                <th class="col-md-1 col-xs-1">答题次数</th>
+                <th class="col-md-2 col-xs-2">答题分数</th>
+
+            </tr>
+            @foreach (jldjwxdt.Models._QaListPage item in Model.DataList)
+            {
+                <tr>
+                    <td>@item.userid</td>
+                    <td>@item.dept_nm</td>
+                    <td>@item.q_dt</td>
+                    <td>@item.q_seq</td>
+                    <td>@item.q_fen @Html.ActionLink("查看详细","QueryUser" , new { usrid = @item.userid.ToString() , q_dt = @item.q_dt , q_seq = @item.q_seq })</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<div>
+    @Html.Raw(Model.PagerHtml()) 共 @Model.Total 条
+</div>
+
+<script type="text/javascript">
+    //保持搜索条件
+    $(function () {
+        $('#userid').val('@ViewBag.Searchuser');
+        $('#deptnm').val('@ViewBag.Searchdept');
+    });
+</script>

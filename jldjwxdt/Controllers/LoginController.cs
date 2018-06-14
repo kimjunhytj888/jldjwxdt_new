@@ -51,6 +51,8 @@ namespace jldjwxdt.Controllers
                         //把登陆用户名存到cookies中
                         Response.Cookies["userName"].Value = userName;
                         Response.Cookies["userName"].Expires = DateTime.Now.AddDays(1);
+                        Response.Cookies["password"].Value = userName;
+                        Response.Cookies["password"].Expires = DateTime.Now.AddDays(1);
                         string ssid = Session.SessionID;
 
                         //user his Table insert

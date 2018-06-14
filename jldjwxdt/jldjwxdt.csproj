@@ -46,10 +46,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJSON">
+      <HintPath>..\kindeditor-4.1.11-zh-CN\kindeditor\asp.net\bin\LitJSON.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -155,6 +173,8 @@
     <Compile Include="Controllers\answerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\QController.cs" />
     <Compile Include="Controllers\SupAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -162,12 +182,21 @@
     <Compile Include="Helps\DataSetToList .cs" />
     <Compile Include="Helps\DbHelperSQL.cs" />
     <Compile Include="Helps\Encrypt.cs" />
+    <Compile Include="Helps\ExcelDownload.cs" />
+    <Compile Include="Helps\List2Datatable.cs" />
+    <Compile Include="Helps\PageInBase.cs" />
+    <Compile Include="Helps\PagerResult.cs" />
     <Compile Include="Helps\SendMessage.cs" />
     <Compile Include="Models\answer.cs" />
     <Compile Include="Models\AskDtlChk.cs" />
     <Compile Include="Models\ask_by_pid.cs" />
+    <Compile Include="Models\NewsModel.cs" />
+    <Compile Include="Models\NewsType.cs" />
     <Compile Include="Models\QAskTempByPid.cs" />
+    <Compile Include="Models\QuestionTb.cs" />
     <Compile Include="Models\User_info.cs" />
+    <Compile Include="Models\_QaListPage.cs" />
+    <Compile Include="Models\_QaListPageParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +232,209 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="demo.aspx" />
+    <Content Include="Image\logo.jpg" />
+    <Content Include="kindeditor\kindeditor-all-min.js" />
+    <Content Include="kindeditor\kindeditor-all.js" />
+    <Content Include="kindeditor\lang\ar.js" />
+    <Content Include="kindeditor\lang\en.js" />
+    <Content Include="kindeditor\lang\ko.js" />
+    <Content Include="kindeditor\lang\ru.js" />
+    <Content Include="kindeditor\lang\zh-CN.js" />
+    <Content Include="kindeditor\lang\zh-TW.js" />
+    <Content Include="kindeditor\license.txt" />
+    <Content Include="kindeditor\plugins\anchor\anchor.js" />
+    <Content Include="kindeditor\plugins\autoheight\autoheight.js" />
+    <Content Include="kindeditor\plugins\baidumap\baidumap.js" />
+    <Content Include="kindeditor\plugins\baidumap\index.html" />
+    <Content Include="kindeditor\plugins\baidumap\map.html" />
+    <Content Include="kindeditor\plugins\clearhtml\clearhtml.js" />
+    <Content Include="kindeditor\plugins\code\code.js" />
+    <Content Include="kindeditor\plugins\code\prettify.css" />
+    <Content Include="kindeditor\plugins\code\prettify.js" />
+    <Content Include="kindeditor\plugins\emoticons\emoticons.js" />
+    <Content Include="kindeditor\plugins\emoticons\images\0.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\1.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\10.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\100.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\101.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\102.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\103.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\104.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\105.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\106.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\107.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\108.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\109.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\11.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\110.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\111.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\112.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\113.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\114.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\115.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\116.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\117.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\118.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\119.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\12.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\120.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\121.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\122.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\123.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\124.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\125.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\126.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\127.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\128.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\129.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\13.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\130.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\131.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\132.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\133.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\134.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\14.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\15.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\16.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\17.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\18.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\19.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\2.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\20.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\21.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\22.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\23.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\24.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\25.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\26.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\27.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\28.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\29.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\3.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\30.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\31.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\32.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\33.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\34.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\35.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\36.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\37.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\38.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\39.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\4.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\40.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\41.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\42.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\43.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\44.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\45.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\46.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\47.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\48.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\49.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\5.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\50.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\51.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\52.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\53.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\54.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\55.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\56.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\57.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\58.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\59.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\6.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\60.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\61.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\62.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\63.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\64.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\65.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\66.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\67.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\68.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\69.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\7.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\70.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\71.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\72.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\73.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\74.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\75.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\76.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\77.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\78.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\79.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\8.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\80.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\81.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\82.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\83.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\84.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\85.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\86.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\87.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\88.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\89.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\9.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\90.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\91.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\92.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\93.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\94.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\95.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\96.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\97.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\98.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\99.gif" />
+    <Content Include="kindeditor\plugins\emoticons\images\static.gif" />
+    <Content Include="kindeditor\plugins\filemanager\filemanager.js" />
+    <Content Include="kindeditor\plugins\filemanager\images\file-16.gif" />
+    <Content Include="kindeditor\plugins\filemanager\images\file-64.gif" />
+    <Content Include="kindeditor\plugins\filemanager\images\folder-16.gif" />
+    <Content Include="kindeditor\plugins\filemanager\images\folder-64.gif" />
+    <Content Include="kindeditor\plugins\filemanager\images\go-up.gif" />
+    <Content Include="kindeditor\plugins\fixtoolbar\fixtoolbar.js" />
+    <Content Include="kindeditor\plugins\flash\flash.js" />
+    <Content Include="kindeditor\plugins\image\image.js" />
+    <Content Include="kindeditor\plugins\image\images\align_left.gif" />
+    <Content Include="kindeditor\plugins\image\images\align_right.gif" />
+    <Content Include="kindeditor\plugins\image\images\align_top.gif" />
+    <Content Include="kindeditor\plugins\image\images\refresh.png" />
+    <Content Include="kindeditor\plugins\insertfile\insertfile.js" />
+    <Content Include="kindeditor\plugins\lineheight\lineheight.js" />
+    <Content Include="kindeditor\plugins\link\link.js" />
+    <Content Include="kindeditor\plugins\map\map.html" />
+    <Content Include="kindeditor\plugins\map\map.js" />
+    <Content Include="kindeditor\plugins\media\media.js" />
+    <Content Include="kindeditor\plugins\multiimage\images\image.png" />
+    <Content Include="kindeditor\plugins\multiimage\images\select-files-en.png" />
+    <Content Include="kindeditor\plugins\multiimage\images\select-files-zh-CN.png" />
+    <Content Include="kindeditor\plugins\multiimage\images\swfupload.swf" />
+    <Content Include="kindeditor\plugins\multiimage\multiimage.js" />
+    <Content Include="kindeditor\plugins\pagebreak\pagebreak.js" />
+    <Content Include="kindeditor\plugins\plainpaste\plainpaste.js" />
+    <Content Include="kindeditor\plugins\preview\preview.js" />
+    <Content Include="kindeditor\plugins\quickformat\quickformat.js" />
+    <Content Include="kindeditor\plugins\table\table.js" />
+    <Content Include="kindeditor\plugins\template\html\1.html" />
+    <Content Include="kindeditor\plugins\template\html\2.html" />
+    <Content Include="kindeditor\plugins\template\html\3.html" />
+    <Content Include="kindeditor\plugins\template\template.js" />
+    <Content Include="kindeditor\plugins\wordpaste\wordpaste.js" />
+    <Content Include="kindeditor\themes\common\anchor.gif" />
+    <Content Include="kindeditor\themes\common\blank.gif" />
+    <Content Include="kindeditor\themes\common\flash.gif" />
+    <Content Include="kindeditor\themes\common\loading.gif" />
+    <Content Include="kindeditor\themes\common\media.gif" />
+    <Content Include="kindeditor\themes\common\rm.gif" />
+    <Content Include="kindeditor\themes\default\background.png" />
+    <Content Include="kindeditor\themes\default\default.css" />
+    <Content Include="kindeditor\themes\default\default.png" />
+    <Content Include="kindeditor\themes\qq\editor.gif" />
+    <Content Include="kindeditor\themes\qq\qq.css" />
+    <Content Include="kindeditor\themes\simple\simple.css" />
     <Content Include="Scripts\ace-elements.min.js" />
     <Content Include="Scripts\ace-extra.min.js" />
     <Content Include="Scripts\ace.min.js" />
@@ -274,11 +506,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\answer\answer_real.cshtml" />
     <Content Include="Views\SupAdmin\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="attached\" />
     <Folder Include="js\" />
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +524,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="kindeditor\file_manager_json.ashx" />
+    <Content Include="kindeditor\upload_json.ashx" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_scrpage.cshtml" />
@@ -301,6 +535,15 @@
     <Content Include="Views\answer\ask_end.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutMain.cshtml" />
+    <Content Include="Views\SupAdmin\_QalistPageAll.cshtml" />
+    <Content Include="Views\SupAdmin\Login_Admin.cshtml" />
+    <Content Include="Views\SupAdmin\Login_SupAdmin.cshtml" />
+    <Content Include="Views\SupAdmin\QueryUser.cshtml" />
+    <Content Include="Views\News\Add.cshtml" />
+    <Content Include="Views\News\NewsView.cshtml" />
+    <Content Include="Views\Q\Add.cshtml" />
+    <Content Include="Views\SupAdmin\Login_user.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

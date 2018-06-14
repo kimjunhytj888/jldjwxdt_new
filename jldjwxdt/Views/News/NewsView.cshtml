@@ -1,0 +1,72 @@
+﻿@model IEnumerable<jldjwxdt.Models.NewsModel>
+@using jldjwxdt.Models
+@{
+  
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>学理论</title>
+    <!-- 引入 Bootstrap -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="~/css/font-awesome-ie7.min.css" />
+    <![endif]-->
+    <!-- page specific plugin styles -->
+
+    <link rel="stylesheet" href="~/css/jquery-ui-1.10.3.full.min.css" />
+    <link rel="stylesheet" href="~/css/datepicker.css" />
+    <link rel="stylesheet" href="~/css/ui.jqgrid.css" />
+    <!-- fonts -->
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+</head>
+<body>
+
+
+    <div class=" container">
+        <div class="row">
+            <div class="left"><h1 class="col-md-12 col-xs-12" >学理论 <small style="background:no-repeat #ff0000;font-family:'Microsoft YaHei';color:black">吉林机关微课堂</small> </h1>
+            
+          
+        </div>
+    </div>
+    <div class=" container">
+        <div class="table-responsive">
+            <table class="table table-condensed" style="word-break:break-all; word-wrap:break-all;">
+                @*<caption>基本的表格布局</caption>*@
+                @foreach (var item in (List<NewsModel>)ViewData["News"])
+                {
+                    <tr>
+                        <td class="col-md-10 col-xs-10" style="font-size:20px" >
+                            @Html.Raw(@item.NewsTitle) @*<small>@Html.Raw(@item.NewsHd)</small>*@
+                        </td>
+                        
+                            <td class="col-md-2 col-xs-2 ">
+                                @Html.Raw(@item.NewsHd)
+                            </td>
+                       
+
+
+                        @*<td>
+                        @Html.Raw(@item.NewsBady)
+                    </td>*@
+                        @*<td class="col-md-4 col-xs-4">
+                        @Html.Raw(@item.Isrtdt)
+                    </td>*@
+                    </tr>
+
+
+                }
+            </table>
+        </div>
+    </div>
+
+        <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

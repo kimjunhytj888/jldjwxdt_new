@@ -1,0 +1,60 @@
+﻿@using jldjwxdt.Models
+@model IEnumerable<jldjwxdt.Models._QaListPage>
+
+@{
+    ViewBag.Title = "_QalistPageAll";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>_QalistPageAll</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.userid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dept_nm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.q_dt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.q_seq)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.q_fen)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in (List<_QaListPage>)ViewData["qlist"])
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.userid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dept_nm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.q_dt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.q_seq)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.q_fen)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>

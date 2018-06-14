@@ -1,0 +1,61 @@
+﻿@using jldjwxdt.Models
+@model jldjwxdt.Models.QAskEndByPidReal
+
+@{
+    ViewBag.Title = "答题结果";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="container">
+    <h2>
+        答题结果: 您本次答题得分是 @ViewData["fen"] 分 超过了 @ViewData["fen"] %的人 @ViewData["fen"] @ViewData["dtck"] </h2>
+        <div class="container">
+            <div class="row">
+
+                <table class="table table-bordered table-striped">
+
+                    @foreach (var item in (List<QAskEndByPidReal>)ViewData["QueryUser"])
+                    {
+                        <table class="table table-bordered">
+                            <tr>
+
+                                <td class="col-md-1 col-xs-1">第 @item.eq_sub_seq 题</td>
+                                <td class="col-md-11 col-xs-11">@item.eq_nm</td>
+
+
+                            </tr>
+
+                        </table>
+                        <table class="table table-bordered table-striped">
+                            <tr>
+
+                                <td class="col-md-5 col-xs-5">答案： @item.eq_key</td>
+                                <td class="col-md-5 col-xs-5">你的选项： @item.eu_key</td>
+                                @{
+                                    if (@item.eq_key == @item.eu_key)
+                                    {
+                                        <td><i class="icon-ok bigger-110 green col-md-1 col-xs-1"></i></td>
+                                    }
+                                    else
+                                    {
+                                        <td><i class="icon-remove bigger-110 red col-md-1 col-xs-1"></i></td>
+                                    }
+
+                                    if (@item.eq_rmk != "")
+                                    {
+                                        <table class="table table-bordered table-striped">
+                                            <td class="col-md-12 col-xs-12">正解： @item.eq_rmk</td>
+                                        </table>
+                                    }
+                                }
+                            </tr>
+                        </table>
+                    }
+                </table>
+
+                <div>
+                    <a href="@Url.Content("~/SupAdmin/login")">个人信息管理</a>
+                </div>
+            </div>
+        </div>

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "登陆页面";
     Layout = "~/Views/Shared/_LayoutAsk.cshtml";
 }
 
@@ -32,9 +32,9 @@
                     <span class="add-on"><i class="icon-lock"></i></span>
 
 
-                    @if (Request.Cookies["userName"] != null)
+                    @if (Request.Cookies["password"] != null)
                     {
-                        <input class="input-large span10" name="password" id="password" type="password" value=@Request.Cookies["userName"].Value />
+                        <input class="input-large span10" name="password" id="password" type="password" value=@Request.Cookies["password"].Value />
 
                     }
 
@@ -44,8 +44,10 @@
                     }
 
 
-                    <input class="input-large span10" type="hidden" name="ReturnCtrl" id="ReturnCtrl" value="@Request.QueryString["ReturnCtrl"]" />
-                    <input class="input-large span10" type="hidden" name="ReturnAction" id="ReturnAction" value="@Request.QueryString["ReturnAction"]" />
+                    @*<input class="input-large span10" type="hidden" name="ReturnCtrl" id="ReturnCtrl" value="@Request.QueryString["ReturnCtrl"]" />
+                    <input class="input-large span10" type="hidden" name="ReturnAction" id="ReturnAction" value="@Request.QueryString["ReturnAction"]" />*@
+               
+                
                 </div>
                 <div class="clearfix"></div>
 
